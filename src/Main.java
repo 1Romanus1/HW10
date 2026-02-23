@@ -4,44 +4,44 @@ import java.time.LocalDate;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        year();
-        phone();
-        delivery();
+        printLeapYear(1900);
+        printLeapYear(2024);
+        recommendAppVersion(1, 2015);
+        delivery(95);
     }
 
-    public static void year() {
-        for (int i = 1900; i < 2026; i++) {
-            if ((i % 4 == 0 && i % 100 != 0) || i % 400 == 0) {
-                System.out.println("Високосный год: " + i);
+    public static void printLeapYear(int year) {
+        for (year = 1900; year <= 2026; year++) {
+            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                System.out.println("Високосный год: " + year);
             } else {
-                System.out.println("Не високосный год: " + i);
+                System.out.println("Не високосный год: " + year);
             }
         }
     }
 
     public static void phone() {
         int os = 1;
-        int yearPhone = 2019;
-        int currentYear = LocalDate.now().getYear();
-        int age = currentYear - yearPhone;
-        if (os == 0) {
-            if (age < 10) {
-                System.out.println("Можете скачивать новую версию на iOS");
-            } else {
-                System.out.println("Установите облегченную версию приложения для iOS по ссылке");
-            }
+        int clientDeviceYear = 2015;
+        recommendAppVersion(os, clientDeviceYear);
+    }
 
+    public static void recommendAppVersion(int os, int clientDeviceYear) {
+        if (os == 0 && clientDeviceYear < 2015) {
+            System.out.println("Установите облегченную версию приложения для iOS по ссылке");
+        } else if (os == 0) {
+            System.out.println("Можете скачивать новую версию на iOS");
         } else if (os == 1) {
-            if (age < 10) {
-                System.out.println("Можете скачивать новую версию на Android");
-            } else {
-                System.out.println("Установите облегченную версию приложения для Android по ссылке");
-            }
+            System.out.println("Можете скачивать новую версию на Android");
+        } else if (os == 1 && clientDeviceYear < 2015) {
+            System.out.println("Установите облегченную версию приложения для Android по ссылке");
+            System.out.println("Неизвестная операционная система");
         }
     }
 
-    public static void delivery() {
-        int deliveryDistance = 95;
+
+    public static void delivery(int deliveryDistance) {
+        deliveryDistance = 95;
         if (deliveryDistance < 20) {
             System.out.println("Доставка будет в течении одних суток: " + deliveryDistance + " км.");
         } else if (deliveryDistance > 20 && deliveryDistance <= 60) {
@@ -53,7 +53,7 @@ public class Main {
         }
     }
 }
-//
+
 
 
 
