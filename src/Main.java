@@ -1,29 +1,25 @@
 import java.time.LocalDate;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+
     public static void main(String[] args) {
-        printLeapYear(1900);
-        printLeapYear(2024);
-        recommendAppVersion(1, 2015);
-        delivery(95);
-    }
 
-    public static void printLeapYear(int year) {
-        for (year = 1900; year <= 2026; year++) {
-            if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
-                System.out.println("Високосный год: " + year);
-            } else {
-                System.out.println("Не високосный год: " + year);
-            }
+        int currentYear = LocalDate.now().getYear();
+
+        if (printLeapYear(currentYear)) {
+            System.out.println("Високосный год: " + currentYear);
+        } else {
+            System.out.println("Не високосный год: " + currentYear);
         }
+
+
+        recommendAppVersion(1, 2015);
+
+        calculateDeliveryDays(95);
     }
 
-    public static void phone() {
-        int os = 1;
-        int clientDeviceYear = 2015;
-        recommendAppVersion(os, clientDeviceYear);
+    public static boolean printLeapYear(int year) {
+        return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
     }
 
     public static void recommendAppVersion(int os, int clientDeviceYear) {
@@ -31,28 +27,36 @@ public class Main {
             System.out.println("Установите облегченную версию приложения для iOS по ссылке");
         } else if (os == 0) {
             System.out.println("Можете скачивать новую версию на iOS");
-        } else if (os == 1) {
-            System.out.println("Можете скачивать новую версию на Android");
         } else if (os == 1 && clientDeviceYear < 2015) {
             System.out.println("Установите облегченную версию приложения для Android по ссылке");
+        } else if (os == 1) {
+            System.out.println("Можете скачивать новую версию на Android");
+        } else {
             System.out.println("Неизвестная операционная система");
         }
     }
 
 
-    public static void delivery(int deliveryDistance) {
-        deliveryDistance = 95;
-        if (deliveryDistance < 20) {
-            System.out.println("Доставка будет в течении одних суток: " + deliveryDistance + " км.");
-        } else if (deliveryDistance > 20 && deliveryDistance <= 60) {
-            System.out.println("Доставка будет в течении двух дней: " + deliveryDistance + " км.");
-        } else if (deliveryDistance > 60 && deliveryDistance <= 100) {
-            System.out.println("Доставка будет в течении трех дней: " + deliveryDistance + " км.");
-        } else {
-            System.out.println("Свыше 100 километров доставки нету: " + deliveryDistance + " км.");
+
+
+        public static int calculateDeliveryDays ( int distance){
+
+            if (distance < 20) {
+                System.out.println("Дистанция: " + distance + " км. 1 день.");
+                return 1;
+            } else if (distance <= 60) {
+                System.out.println("Дистанция: " + distance + " км. 2 дня.");
+                return 2;
+            } else if (distance <= 100) {
+                System.out.println("Дистанция: " + distance + " км. 3 дня.");
+                return 3;
+            } else {
+                System.out.println("Дистанция: " + distance + " км. Доставки нет.");
+                return -1;
+            }
         }
     }
-}
+
 
 
 
